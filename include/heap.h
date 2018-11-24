@@ -38,13 +38,13 @@ struct heap {
     /** The current length of the array. */
     unsigned int length;
     /** The maximum size of the heap. */
-    unsigned int size;
+    const unsigned int size;
     /** The heap array. */
     struct heapNode** array;
     /** The function that returns ordering value. */
-    int32_t (*getValue)(void*);
+    const int32_t (*getValue)(void*);
     /** Whether this is a maximum heap, else it is a minimum heap. */
-    uint8_t isMax : 1;
+    const uint8_t isMax : 1;
 };
 
 /**
@@ -76,89 +76,43 @@ struct heap {
     .getValue = (f),           \
     .isMax    = 1,             \
 }
-#ifdef NOT_DEFINED
-/**
- * This macro returns the index of the parent of a node.
- *
- * @param The node which we want the parent index.
- */
-#define heapGetParentIndex(n) ((n)->position/2)
 
 /**
- * This macro returns the index of the left child of a node.
+ * This function inserts a node into a minimum heap.
  *
- * @param The node which we want the left child index.
- */
-#define heapGetLeftChildIndex(n) (2*(n)->position)
-
-/**
- * This macro returns the index of the right child of a node.
+ * @param heap The heap we want to insert a node into.
+ * @param node The node we want to insert.
  *
- * @param The node which we want the right child index.
+ * @return #NULL if the heap is full, else the inserted node.
  */
-#define heapGetRightChildIndex(n) (2*(n)->position+1)
-
-/**
- * This function swaps two nodes in the heap.
- *
- * @param heap  The pointer to the heap structure.
- * @param node1 The pointer to the first heap node to swap.
- * @param node2 The pointer to the second heap node to swap.
- */
-void heapSwap(struct heap* heap, struct heapNode* node1, struct heapNode* node2);
-
-/**
- * This macro swaps a node with its parent.
- *
- * @param h The pointer to the heap structure.
- * @param n The pointer to the node we want to swap with its parent.
- */
-#define heapSwapParent(h,n) {                             \
-    int index = heapGetParentIndex(n);                    \
-    if(index != 0) heapSwap((h), (n), (h)->array[index]); \
-}
-
-/**
- * This macro swaps a node with its left child.
- *
- * @param h The pointer to the heap structure.
- * @param n The pointer to the node we want to swap with its left child.
- */
-#define heapSwapLeftChild(h,n) {                                 \
-    int index = heapGetLeftChildIndex((n));                      \
-    if(index < (h)->size) heapSwap((h), (n), (h)->array[index]); \
-}
-
-/**
- * This macro swaps a node with its right child.
- *
- * @param h The pointer to the heap structure.
- * @param n The pointer to the node we want to swap with its right child.
- */
-#define heapSwapRightChild(h,n) {                                \
-    int index = heapGetRightChildIndex((n));                     \
-    if(index < (h)->size) heapSwap((h), (n), (h)->array[index]); \
-}
-
-/**
- * This function updates the position of a node in the heap. It should be
- * called when the content of the data in the heap node has changed.
- *
- * @param heap The pointer to the heap structure.
- * @param node The pointer to the node to update.
- */
-struct heapNode* heapUpdateNode(struct heap* heap, struct heapNode* node);
-/**
- * This function inserts a node into the heap. The position of the heap node
- * should be zero. The node shouldn't already be a heap.
- *
- * @param heap The pointer to the heap structure.
- * @param node The pointer to the node to insert.
- */
-#endif
-
 struct heapNode* heapMinInsertNode(struct heap* heap, struct heapNode* node);
 
-struct headNode* heapDelete(struct heap* heap);
+/**
+ * This function inserts a node into a maximum heap.
+ *
+ * @param heap The heap we want to insert a node into.
+ * @param node The node we want to insert.
+ *
+ * @return #NULL if the heap is full, else the inserted node.
+ */
+struct heapNode* heapMaxInsertNode(struct heap* heap, struct heapNode* node);
+
+/**
+ * This function remove and returns the root node from a minimum heap.
+ *
+ * @param heap The heap we want to remove a node.
+ *
+ * @return #NULL if the heap is empty, else the root node.
+ */
+struct headNode* heapMinDelete(struct heap* heap);
+
+/**
+ * This function remove and returns the root node from a maximum heap.
+ *
+ * @param heap The heap we want to remove a node.
+ *
+ * @return #NULL if the heap is empty, else the root node.
+ */
+struct headNode* heapMaxDelete(struct heap* heap);
 
 #endif
