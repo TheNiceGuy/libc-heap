@@ -12,13 +12,13 @@ void heapSwapNode(struct heap* heap, unsigned int n1, unsigned int n2) {
     heap->array[n2] = tempNode;
 }
 
+int heapCompareTo(struct heap* heap, unsigned int n1, unsigned int n2) {
+    return heap->compare(heap->array[n1]->data, heap->array[n2]->data);
+}
+
 /**************************/
 /* minimum heap functions */
 /**************************/
-
-int heapMinCompareTo(struct heap* heap, unsigned int n1, unsigned int n2) {
-    return heap->compare(heap->array[n1]->data, heap->array[n2]->data);
-}
 
 struct heapNode* heapMinInsertNode(struct heap* heap, struct heapNode* node) {
     /* check if there's space available */
@@ -26,7 +26,7 @@ struct heapNode* heapMinInsertNode(struct heap* heap, struct heapNode* node) {
 
     /* percolate up */
     unsigned int hole = ++heap->length;
-    for(heap->array[0] = node; heapMinCompareTo(heap, 0, hole/2); hole /= 2)
+    for(heap->array[0] = node; heapCompareTo(heap, 0, hole/2); hole /= 2)
         heapSwapNode(heap, hole, hole/2);
 
     /* insert the new node */
@@ -41,10 +41,10 @@ void heapMinPercolateDown(struct heap* heap, unsigned int hole) {
         /* check if we percolate left or right */
         child = 2*hole;
         if(child != heap->length)
-            if(heapMinCompareTo(heap, child+1, child)) child++;
+            if(heapCompareTo(heap, child+1, child)) child++;
 
         /* swap if heap property would still be respected */
-        if(heapMinCompareTo(heap, child, hole))
+        if(heapCompareTo(heap, child, hole))
             heapSwapNode(heap, child, hole);
         else
             break;
@@ -83,7 +83,7 @@ struct heapNode* heapMinUpdateNode(struct heap* heap, struct heapNode* node) {
 
     /* percolate up if possible */
     unsigned int parent = position/2;    
-    if(heapMinCompareTo(heap, position, parent)) {
+    if(heapCompareTo(heap, position, parent)) {
         while(1) {
             /* swap nodes */
             heapSwapNode(heap, position, parent);
@@ -94,7 +94,7 @@ struct heapNode* heapMinUpdateNode(struct heap* heap, struct heapNode* node) {
 
             /* exit if we can't go higher */
             parent = position/2;
-            if(!heapMinCompareTo(heap, position, parent)) break;
+            if(!heapCompareTo(heap, position, parent)) break;
         }
         return node;
     }
@@ -108,17 +108,13 @@ struct heapNode* heapMinUpdateNode(struct heap* heap, struct heapNode* node) {
 /* maximum heap functions */
 /**************************/
 
-int heapMaxCompareTo(struct heap* heap, unsigned int n1, unsigned int n2) {
-    return heap->compare(heap->array[n1]->data, heap->array[n2]->data);
-}
-
 struct heapNode* heapMaxInsertNode(struct heap* heap, struct heapNode* node) {
     /* check if there's space available */
     if(heap->length == heap->size-1) return NULL;
 
     /* percolate up */
     unsigned int hole = ++heap->length;
-    for(heap->array[0] = node; heapMaxCompareTo(heap, 0, hole/2); hole /= 2)
+    for(heap->array[0] = node; heapCompareTo(heap, 0, hole/2); hole /= 2)
         heapSwapNode(heap, hole, hole/2);
 
     /* insert the new node */
@@ -133,10 +129,10 @@ void heapMaxPercolateDown(struct heap* heap, unsigned int hole) {
         /* check if we percolate left or right */
         child = 2*hole;
         if(child != heap->length)
-            if(heapMaxCompareTo(heap, child+1, child)) child++;
+            if(heapCompareTo(heap, child+1, child)) child++;
 
         /* swap if heap property would still be respected */
-        if(heapMaxCompareTo(heap, child, hole))
+        if(heapCompareTo(heap, child, hole))
             heapSwapNode(heap, child, hole);
         else
             break;
@@ -175,7 +171,7 @@ struct heapNode* heapMaxUpdateNode(struct heap* heap, struct heapNode* node) {
 
     /* percolate up if possible */
     unsigned int parent = position/2;    
-    if(heapMaxCompareTo(heap, position, parent)) {
+    if(heapCompareTo(heap, position, parent)) {
         while(1) {
             /* swap nodes */
             heapSwapNode(heap, position, parent);
@@ -186,7 +182,7 @@ struct heapNode* heapMaxUpdateNode(struct heap* heap, struct heapNode* node) {
 
             /* exit if we can't go higher */
             parent = position/2;
-            if(!heapMaxCompareTo(heap, position, parent)) break;
+            if(!heapCompareTo(heap, position, parent)) break;
         }
         return node;
     }
