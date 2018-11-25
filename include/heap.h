@@ -104,7 +104,7 @@ struct heapNode* heapMaxInsertNode(struct heap* heap, struct heapNode* node);
  *
  * @return #NULL if the heap is empty, else the root node.
  */
-struct headNode* heapMinDelete(struct heap* heap);
+struct heapNode* heapMinDeleteNode(struct heap* heap);
 
 /**
  * This function remove and returns the root node from a maximum heap.
@@ -113,7 +113,7 @@ struct headNode* heapMinDelete(struct heap* heap);
  *
  * @return #NULL if the heap is empty, else the root node.
  */
-struct headNode* heapMaxDelete(struct heap* heap);
+struct heapNode* heapMaxDeleteNode(struct heap* heap);
 
 /**
  * This function updates the position of the node in a minimum heap.
