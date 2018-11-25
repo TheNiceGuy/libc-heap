@@ -115,4 +115,24 @@ struct headNode* heapMinDelete(struct heap* heap);
  */
 struct headNode* heapMaxDelete(struct heap* heap);
 
+/**
+ * This function updates the position of the node in a minimum heap.
+ * 
+ * @param heap The heap we want to update a node.
+ * @param node The node we want to update.
+ *
+ * @return #NULL if the node isn't in the heap, the node.
+ */
+struct heapNode* heapMinUpdateNode(struct heap* heap, struct heapNode* node);
+
+/**
+ * This function updates the position of the node in a maximum heap.
+ * 
+ * @param heap The heap we want to update a node.
+ * @param node The node we want to update.
+ *
+ * @return #NULL if the node isn't in the heap, the node.
+ */
+struct heapNode* heapMaxUpdateNode(struct heap* heap, struct heapNode* node);
+
 #endif

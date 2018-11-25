@@ -1,0 +1,22 @@
+image: rikorose/gcc-cmake
+
+stages:
+    - build
+    - test
+
+build:
+    stage: build
+    artifacts:
+        paths:
+            - build/
+    script:
+        - mkdir build && cd build && cmake .. && make
+
+test:
+    stage: test
+    dependencies:
+        - build
+    script:
+        - cd build && make test
+
+
