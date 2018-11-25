@@ -6,7 +6,7 @@
 #define HEAP_SIZE 8
 
 struct heapNode* array[HEAP_SIZE] = {[0 ... HEAP_SIZE-1] = NULL};
-struct heap heap = TEST_HEAP_INIT(HEAP_SIZE, array, &getValue);
+struct heap heap = TEST_HEAP_INIT(HEAP_SIZE, array, &compare);
 
 int main() {
     /* insert a node, initial placement */

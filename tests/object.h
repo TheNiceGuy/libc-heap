@@ -8,7 +8,7 @@ struct object {
     int32_t content;
 };
 
-int32_t getValue(void* data);
+uint8_t compare(void* data1, void* data2);
 
 struct heapNode* heapMinInsertNode(struct heap* heap, struct heapNode* node);
 void heapMinPercolateDown(struct heap* heap, unsigned int hole);

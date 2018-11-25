@@ -17,9 +17,7 @@ void heapSwapNode(struct heap* heap, unsigned int n1, unsigned int n2) {
 /**************************/
 
 int heapMinCompareTo(struct heap* heap, unsigned int n1, unsigned int n2) {
-    int32_t value1 = heap->getValue(heap->array[n1]->data);
-    int32_t value2 = heap->getValue(heap->array[n2]->data);
-    return (value1 < value2) ? 1 : 0;
+    return heap->compare(heap->array[n1]->data, heap->array[n2]->data);
 }
 
 struct heapNode* heapMinInsertNode(struct heap* heap, struct heapNode* node) {
@@ -111,9 +109,7 @@ struct heapNode* heapMinUpdateNode(struct heap* heap, struct heapNode* node) {
 /**************************/
 
 int heapMaxCompareTo(struct heap* heap, unsigned int n1, unsigned int n2) {
-    int32_t value1 = heap->getValue(heap->array[n1]->data);
-    int32_t value2 = heap->getValue(heap->array[n2]->data);
-    return (value1 > value2) ? 1 : 0;
+    return heap->compare(heap->array[n1]->data, heap->array[n2]->data);
 }
 
 struct heapNode* heapMaxInsertNode(struct heap* heap, struct heapNode* node) {

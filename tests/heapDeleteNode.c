@@ -8,7 +8,7 @@
 struct object objects[HEAP_SIZE];
 struct heapNode nodes[HEAP_SIZE];
 struct heapNode* array[HEAP_SIZE] = {[0 ... HEAP_SIZE-1] = NULL};
-struct heap heap = TEST_HEAP_INIT(HEAP_SIZE, array, &getValue);
+struct heap heap = TEST_HEAP_INIT(HEAP_SIZE, array, &compare);
 
 int main() {
     /* create a heap */

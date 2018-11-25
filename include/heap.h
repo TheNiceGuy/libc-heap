@@ -41,8 +41,8 @@ struct heap {
     const unsigned int size;
     /** The heap array. */
     struct heapNode** array;
-    /** The function that returns ordering value. */
-    int32_t (*getValue)(void*);
+    /** The function for comparing nodes. */
+    uint8_t (*compare)(void*,void*);
     /** Whether this is a maximum heap, else it is a minimum heap. */
     const uint8_t isMax : 1;
 };
@@ -52,14 +52,14 @@ struct heap {
  *
  * @param s The size of the heap array.
  * @param a The array of the heap.
- * @param f The function that weights node.
+ * @param f The function that compares the nodes.
  */
 #define MIN_HEAP_INIT(s,a,f) { \
-    .length   = 0,             \
-    .size     = s,             \
-    .array    = (a),           \
-    .getValue = (f),           \
-    .isMax    = 0,             \
+    .length  = 0,              \
+    .size    = (s),            \
+    .array   = (a),            \
+    .compare = (f),            \
+    .isMax   = 0,              \
 }
 
 /**
@@ -67,14 +67,14 @@ struct heap {
  *
  * @param s The size of the heap array.
  * @param a The array of the heap.
- * @param f The function that weights node.
+ * @param f The function that compares the nodes.
  */
 #define MAX_HEAP_INIT(s,a,f) { \
-    .length   = 0,             \
-    .size     = s,             \
-    .array    = (a),           \
-    .getValue = (f),           \
-    .isMax    = 1,             \
+    .length  = 0,              \
+    .size    = (s),            \
+    .array   = (a),            \
+    .compare = (f),            \
+    .isMax   = 1,              \
 }
 
 /**
