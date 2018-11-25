@@ -42,7 +42,7 @@ struct heap {
     /** The heap array. */
     struct heapNode** array;
     /** The function that returns ordering value. */
-    const int32_t (*getValue)(void*);
+    int32_t (*getValue)(void*);
     /** Whether this is a maximum heap, else it is a minimum heap. */
     const uint8_t isMax : 1;
 };
