@@ -24,6 +24,9 @@ struct heapNode* heapMinInsertNode(struct heap* heap, struct heapNode* node) {
     /* check if there's space available */
     if(heap->length == heap->size-1) return NULL;
 
+    /* make sure the node isn't already in a tree */
+    if(node->position != 0) return NULL;
+
     /* percolate up */
     unsigned int hole = ++heap->length;
     for(heap->array[0] = node; heapCompareTo(heap, 0, hole/2); hole /= 2)
@@ -111,6 +114,9 @@ struct heapNode* heapMinUpdateNode(struct heap* heap, struct heapNode* node) {
 struct heapNode* heapMaxInsertNode(struct heap* heap, struct heapNode* node) {
     /* check if there's space available */
     if(heap->length == heap->size-1) return NULL;
+
+    /* make sure the node isn't already in a tree */
+    if(node->position != 0) return NULL;
 
     /* percolate up */
     unsigned int hole = ++heap->length;

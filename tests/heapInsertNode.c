@@ -13,6 +13,7 @@ int main() {
     struct object obj1 = {.content = 10};
     struct heapNode node1 = HEAP_ELEMENT_INIT_WITH_DATA(&obj1);
     assert(heapInsertNode(&heap, &node1) != NULL);
+    assert(heapInsertNode(&heap, &node1) == NULL);
     assert(heap.array[0] == NULL);
     assert(heap.array[1] == &node1);
     assert(heap.array[2] == NULL);
@@ -28,6 +29,7 @@ int main() {
     struct object obj2 = {.content = 15};
     struct heapNode node2 = HEAP_ELEMENT_INIT_WITH_DATA(&obj2);
     assert(heapInsertNode(&heap, &node2) != NULL);
+    assert(heapInsertNode(&heap, &node2) == NULL);
     assert(heap.array[0] == NULL);
     assert(heap.array[1] == &node1);
     assert(heap.array[2] == &node2);
@@ -44,6 +46,7 @@ int main() {
     struct object obj3 = {.content = 5};
     struct heapNode node3 = HEAP_ELEMENT_INIT_WITH_DATA(&obj3);
     assert(heapInsertNode(&heap, &node3) != NULL);
+    assert(heapInsertNode(&heap, &node3) == NULL);
     assert(heap.array[0] == NULL);
     assert(heap.array[1] == &node3);
     assert(heap.array[2] == &node2);
@@ -61,6 +64,7 @@ int main() {
     struct object obj4 = {.content = 20};
     struct heapNode node4 = HEAP_ELEMENT_INIT_WITH_DATA(&obj4);
     assert(heapInsertNode(&heap, &node4) != NULL);
+    assert(heapInsertNode(&heap, &node4) == NULL);
     assert(heap.array[0] == NULL);
     assert(heap.array[1] == &node3);
     assert(heap.array[2] == &node2);
@@ -79,6 +83,7 @@ int main() {
     struct object obj5 = {.content = 12};
     struct heapNode node5 = HEAP_ELEMENT_INIT_WITH_DATA(&obj5);
     assert(heapInsertNode(&heap, &node5) != NULL);
+    assert(heapInsertNode(&heap, &node5) == NULL);
     assert(heap.array[0] == NULL);
     assert(heap.array[1] == &node3);
     assert(heap.array[2] == &node5);
@@ -98,6 +103,7 @@ int main() {
     struct object obj6 = {.content = 8};
     struct heapNode node6 = HEAP_ELEMENT_INIT_WITH_DATA(&obj6);
     assert(heapInsertNode(&heap, &node6) != NULL);
+    assert(heapInsertNode(&heap, &node6) == NULL);
     assert(heap.array[0] == NULL);
     assert(heap.array[1] == &node3);
     assert(heap.array[2] == &node5);
@@ -118,6 +124,7 @@ int main() {
     struct object obj7 = {.content = 20};
     struct heapNode node7 = HEAP_ELEMENT_INIT_WITH_DATA(&obj7);
     assert(heapInsertNode(&heap, &node7) != NULL);
+    assert(heapInsertNode(&heap, &node7) == NULL);
     assert(heap.array[0] == NULL);
     assert(heap.array[1] == &node3);
     assert(heap.array[2] == &node5);
@@ -138,6 +145,7 @@ int main() {
     /* insert a node, heap is full */
     struct object obj8 = {.content = 40};
     struct heapNode node8 = HEAP_ELEMENT_INIT_WITH_DATA(&obj8);
+    assert(heapInsertNode(&heap, &node8) == NULL);
     assert(heapInsertNode(&heap, &node8) == NULL);
     assert(heap.array[0] == NULL);
     assert(heap.array[1] == &node3);
